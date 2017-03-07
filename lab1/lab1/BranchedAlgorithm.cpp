@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "BranchedAlgorithm.h"
-#include "lab1.h"
-
+#include <fstream>
+static char* fileValues = "branched_values.txt";
+static char* fileResult = "branched_result.txt";
+using namespace std;
 
 double function(double a, double b, double x) {
 	if (x > 0) {
@@ -25,6 +27,39 @@ INT_PTR CALLBACK BranchedAlgoWnd(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 		int wmId = LOWORD(wParam);
 		switch (wmId)
 		{
+		case IDC_BUTTON2_READ:
+		{
+			fstream file;
+			file.open(fileValues);
+			double a, b, x;
+			const int len = 30;
+			TCHAR strA[len];
+			TCHAR strB[len];
+			TCHAR strX[len];
+			file >> a >> b >> x;
+			sprintf_s(strA, "%f", a);
+			sprintf_s(strB, "%f", b);
+			sprintf_s(strX, "%f", x);
+			SetWindowText(GetDlgItem(hDlg, IDC_EDIT2_A), strA);
+			SetWindowText(GetDlgItem(hDlg, IDC_EDIT2_B), strB);
+			SetWindowText(GetDlgItem(hDlg, IDC_EDIT2_X), strX);
+			file.close();
+			break;
+		}
+		case IDC_BUTTON2_WRITE:
+		{
+			fstream file;
+			file.open(fileResult, ios::trunc);
+			double y;
+			const int len = 30;
+			TCHAR strY[len];
+			GetWindowText(GetDlgItem(hDlg, IDC_EDIT2_Y), strY, len);
+			y = atof(strY);
+			file << y;
+			MessageBox(NULL, "Відповідь записано", "Message", MB_OK);
+			file.close();
+			break;
+		}
 		case IDC_BUTTON2_CALC:
 		{
 			double a, b, x, y;

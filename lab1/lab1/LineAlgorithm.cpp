@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "LineAlgorithm.h"
-#include "lab1.h"
 #include <fstream>
+static char* fileValues = "line_values.txt";
+static char* fileResult = "line_result.txt";
 using namespace std;
-char* fileValues = "line_values.txt";
-char* fileAnswer= "line_answer.txt";
+
 
 double function(double b, double c)
 {
@@ -48,7 +48,8 @@ INT_PTR CALLBACK LineAlgoWnd(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 		case IDC_BUTTON1_WRITE:
 		{
 			fstream file;
-			file.open(fileAnswer);
+			file.open(fileResult);
+			file.clear();
 			double y;
 			const int len = 30;
 			TCHAR strY[len];
