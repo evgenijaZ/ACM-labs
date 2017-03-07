@@ -3,7 +3,8 @@
 #include "lab1.h"
 #include <fstream>
 using namespace std;
-char* fileName= "line.txt";
+char* fileValues = "line_values.txt";
+char* fileAnswer= "line_answer.txt";
 
 double function(double b, double c)
 {
@@ -31,7 +32,7 @@ INT_PTR CALLBACK LineAlgoWnd(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 		case IDC_BUTTON1_READ:
 		{
 			fstream file;
-			file.open(fileName);
+			file.open(fileValues);
 			double b, c;
 			const int len = 30;
 			TCHAR strB[len];
@@ -41,6 +42,20 @@ INT_PTR CALLBACK LineAlgoWnd(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			sprintf_s(strC, "%f", c);
 			SetWindowText(GetDlgItem(hDlg, IDC_EDIT1_B), strB);
 			SetWindowText(GetDlgItem(hDlg, IDC_EDIT1_C), strC);
+			file.close();
+			break;
+		}
+		case IDC_BUTTON1_WRITE:
+		{
+			fstream file;
+			file.open(fileAnswer);
+			double y;
+			const int len = 30;
+			TCHAR strY[len];
+			GetWindowText(GetDlgItem(hDlg, IDC_EDIT1_Y), strY, len);
+			y = atof(strY);
+			file << y;
+			MessageBox(NULL, "Відповідь записано", "Message", MB_OK);
 			file.close();
 			break;
 		}
