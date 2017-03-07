@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "LineAlgorithm.h"
 #include <fstream>
+#include "lab1.h"
 static char* fileValues = "line_values.txt";
 static char* fileResult = "line_result.txt";
 using namespace std;

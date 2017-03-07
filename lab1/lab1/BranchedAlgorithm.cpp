@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "lab1.h"
 #include "BranchedAlgorithm.h"
 #include <fstream>
 static char* fileValues = "branched_values.txt";
@@ -49,7 +50,7 @@ INT_PTR CALLBACK BranchedAlgoWnd(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 		case IDC_BUTTON2_WRITE:
 		{
 			fstream file;
-			file.open(fileResult, ios::trunc);
+			file.open(fileResult);
 			double y;
 			const int len = 30;
 			TCHAR strY[len];
