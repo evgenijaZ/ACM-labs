@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "LineAlgorithm.h"
 #include "lab1.h"
-
+#include <fstream>
+using namespace std;
+char* fileName= "line.txt";
 
 double function(double b, double c)
 {
@@ -26,6 +28,22 @@ INT_PTR CALLBACK LineAlgoWnd(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 		int wmId = LOWORD(wParam);
 		switch (wmId)
 		{
+		case IDC_BUTTON1_READ:
+		{
+			fstream file;
+			file.open(fileName);
+			double b, c;
+			const int len = 30;
+			TCHAR strB[len];
+			TCHAR strC[len];
+			file >> b >> c;
+			sprintf_s(strB, "%f", b);
+			sprintf_s(strC, "%f", c);
+			SetWindowText(GetDlgItem(hDlg, IDC_EDIT1_B), strB);
+			SetWindowText(GetDlgItem(hDlg, IDC_EDIT1_C), strC);
+			file.close();
+			break;
+		}
 		case IDC_BUTTON1_CALC:
 		{
 			double b, c, y;
