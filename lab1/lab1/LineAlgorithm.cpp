@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "LineAlgorithm.h"
+#include <fstream>
 #include "lab1.h"
+static char* fileValues = "line_values.txt";
+static char* fileResult = "line_result.txt";
+using namespace std;
 
 
 double function(double b, double c)
@@ -26,6 +30,37 @@ INT_PTR CALLBACK LineAlgoWnd(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 		int wmId = LOWORD(wParam);
 		switch (wmId)
 		{
+		case IDC_BUTTON1_READ:
+		{
+			fstream file;
+			file.open(fileValues);
+			double b, c;
+			const int len = 30;
+			TCHAR strB[len];
+			TCHAR strC[len];
+			file >> b >> c;
+			sprintf_s(strB, "%f", b);
+			sprintf_s(strC, "%f", c);
+			SetWindowText(GetDlgItem(hDlg, IDC_EDIT1_B), strB);
+			SetWindowText(GetDlgItem(hDlg, IDC_EDIT1_C), strC);
+			file.close();
+			break;
+		}
+		case IDC_BUTTON1_WRITE:
+		{
+			fstream file;
+			file.open(fileResult);
+			file.clear();
+			double y;
+			const int len = 30;
+			TCHAR strY[len];
+			GetWindowText(GetDlgItem(hDlg, IDC_EDIT1_Y), strY, len);
+			y = atof(strY);
+			file << y;
+			MessageBox(NULL, "Відповідь записано", "Message", MB_OK);
+			file.close();
+			break;
+		}
 		case IDC_BUTTON1_CALC:
 		{
 			double b, c, y;
