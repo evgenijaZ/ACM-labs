@@ -105,8 +105,23 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // Сохранить дескриптор экземпляра в глобальной переменной
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+	   400, 160, 590, 450, nullptr, nullptr, hInstance, nullptr);
+   HFONT hFont = CreateFont(-16, 0, 0, 0, FW_NORMAL, 0, FALSE,
+	   0, DEFAULT_CHARSET, OUT_DEFAULT_PRECIS,
+	   CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY,
+	   DEFAULT_PITCH | FF_SWISS, TEXT("Corbel"));
+   HWND hEdit = CreateWindowEx(WS_EX_CLIENTEDGE, TEXT("edit"), "", WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_READONLY, 10, 10, 550, 300, hWnd, (HMENU)30000, hInstance, NULL);
 
+   HWND hButLine			= CreateWindow(TEXT("button"), TEXT("Лінійний алгоритм"),	  WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_CENTER | BS_MULTILINE, 100, 320, 110, 40, hWnd, (HMENU)ID_LINE, hInstance, NULL);
+   HWND hButBranched		= CreateWindow(TEXT("button"), TEXT("Розгалужений алгоритм"), WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_CENTER | BS_MULTILINE, 230, 320, 110, 40, hWnd, (HMENU)ID_BRANCHED, hInstance, NULL);
+   HWND hButCycled		= CreateWindow(TEXT("button"), TEXT("Циклічний алгоритм"),	  WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON | BS_CENTER | BS_MULTILINE, 360, 320, 110, 40, hWnd, (HMENU)ID_CYCLED, hInstance, NULL);
+   SendMessage(hButLine, WM_SETFONT, (WPARAM)hFont, 0);
+   SendMessage(hButBranched, WM_SETFONT, (WPARAM)hFont, 0);
+   SendMessage(hButCycled, WM_SETFONT, (WPARAM)hFont, 0);
+   SendMessage(hEdit, WM_SETFONT, (WPARAM)hFont, 0);
+   SetWindowText(hEdit, "Оберіть алгоритм:\t\t\t\t\t\t1.Лінійний \t\t\t\t\t\t2.Розгалужений \t\t\t\t\t\t3.Циклічний");
+
+  
    if (!hWnd)
    {
       return FALSE;
@@ -162,9 +177,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Добавьте сюда любой код прорисовки, использующий HDC...
-            EndPaint(hWnd, &ps);
+			HDC hDC = BeginPaint(hWnd, &ps);
+			EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:

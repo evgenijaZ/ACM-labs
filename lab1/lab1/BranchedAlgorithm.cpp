@@ -76,7 +76,7 @@ INT_PTR CALLBACK BranchedAlgoWnd(HWND hDlg, UINT message, WPARAM wParam, LPARAM 
 			GetWindowText(GetDlgItem(hDlg, IDC_EDIT2_X), strX, len);
 			x = atof(strX);
 			y = function(a, b, x);
-			sprintf_s(strY, "%f", y);
+			sprintf_s(strY, "%.9f", y);
 			SetWindowText(GetDlgItem(hDlg, IDC_EDIT2_Y), strY);
 			break;
 		}

@@ -73,7 +73,7 @@ INT_PTR CALLBACK LineAlgoWnd(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPar
 			GetWindowText(GetDlgItem(hDlg, IDC_EDIT1_C), strC, len);
 			c = atof(strC);
 			y = function(b, c);
-			sprintf_s(strY, "%f", y);
+			sprintf_s(strY, "%.9f", y);
 			SetWindowText(GetDlgItem(hDlg, IDC_EDIT1_Y), strY);
 			break;
 		}
