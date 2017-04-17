@@ -24,5 +24,10 @@ namespace lab5
                 }
             }
         }
+        public void CalculateRoots(double[,] arr, ref double x1, ref double x2, ref double x3) {
+            x3 = arr[2, 3];
+            x2 = arr[1, 3] - x3 * arr[1, 2];
+            x1 = arr[0, 3] - (x2 * arr[0, 1] + x3 * arr[0, 2]);
+        }
     }
 }
