@@ -21,20 +21,34 @@ namespace lab5
         {
             double[,] array = new double[3, 4];
             Double.TryParse(textBox1.Text,  out array[0, 0]);
-            Double.TryParse(textBox2.Text,  out array[0, 1]);
-            Double.TryParse(textBox3.Text,  out array[0, 2]);
-            Double.TryParse(textBox4.Text,  out array[1, 0]);
+            Double.TryParse(textBox2.Text,  out array[1, 0]);
+            Double.TryParse(textBox3.Text,  out array[2, 0]);
+            Double.TryParse(textBox4.Text,  out array[0, 1]);
             Double.TryParse(textBox5.Text,  out array[1, 1]);
-            Double.TryParse(textBox6.Text,  out array[1, 2]);
-            Double.TryParse(textBox7.Text,  out array[2, 0]);
-            Double.TryParse(textBox8.Text,  out array[2, 1]);
+            Double.TryParse(textBox6.Text,  out array[2, 1]);
+            Double.TryParse(textBox7.Text,  out array[0, 2]);
+            Double.TryParse(textBox8.Text,  out array[1, 2]);
             Double.TryParse(textBox9.Text,  out array[2, 2]);
-            Double.TryParse(textBox10.Text, out array[3, 0]);
-            Double.TryParse(textBox11.Text, out array[3, 1]);
-            Double.TryParse(textBox12.Text, out array[3, 2]);
+            Double.TryParse(textBox10.Text, out array[0, 3]);
+            Double.TryParse(textBox11.Text, out array[1, 3]);
+            Double.TryParse(textBox12.Text, out array[2, 3]);
 
+            Solver s = new Solver();
+            s.TransformMatrix(array, 3, 4);
 
-           
+            textBox1.Text =  Convert.ToString(array[0, 0]);
+            textBox2.Text =  Convert.ToString(array[1, 0]);
+            textBox3.Text =  Convert.ToString(array[2, 0]);
+            textBox4.Text =  Convert.ToString(array[0, 1]);
+            textBox5.Text =  Convert.ToString(array[1, 1]);
+            textBox6.Text =  Convert.ToString(array[2, 1]);
+            textBox7.Text =  Convert.ToString(array[0, 2]);
+            textBox8.Text =  Convert.ToString(array[1, 2]);
+            textBox9.Text =  Convert.ToString(array[2, 2]);
+            textBox10.Text = Convert.ToString(array[0, 3]);
+            textBox11.Text = Convert.ToString(array[1, 3]);
+            textBox12.Text = Convert.ToString(array[2, 3]);
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
