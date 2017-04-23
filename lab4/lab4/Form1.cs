@@ -40,7 +40,7 @@ namespace lab4
             }
             chart1.Series[2].Points.AddXY(1.02987, 0);
             chart1.Series[2].Points.AddXY(-1.02987, 0);
-            chart1.ChartAreas[0].AxisX.MajorGrid.Interval = 0.25;
+            chart1.ChartAreas[0].AxisX.MajorGrid.Interval = 0.5;
             chart1.ChartAreas[0].AxisY.MajorGrid.Interval = 0.5;
             
 
@@ -65,10 +65,28 @@ namespace lab4
                 Solver s = new Solver();
                 if (s.FindNode(a, b, eps, ref x, ref k))
                 {
+                    if (x < a) x = -x;
                     textBox4.Text = x.ToString();
+                    chart1.Series[0].Points.Clear();
+                    chart1.Series[1].Points.Clear();
+                    chart1.Series[2].Points.Clear();
+
+                    double x1 = a;
+                    while (x1 <= b)
+                    {
+                        chart1.Series[0].Points.AddXY(x1, s.Function(x1));
+                        chart1.Series[1].Points.AddXY(x1, 0);
+                        x1 += (b-a)/10;
+                    }
+
+                    chart1.Series[2].Points.AddXY(x, 0);
+                    
+                    //chart1.ChartAreas[0].AxisX.MajorGrid.Interval = 0.5;
+                    //chart1.ChartAreas[0].AxisY.MajorGrid.Interval = 0.5;
+
                 }
                 else {
-                    MessageBox.Show("Функція не має коренів на цьому проміжку", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Теорема про існування єдиного кореню не виконується", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
